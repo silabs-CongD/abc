@@ -5,3 +5,4 @@
 [submodule "open-3d-print-prototypes"]
 	path = open-3d-print-prototypes
 	url = https://github.com/SiliconLabsSoftware/open-3d-print-prototypes.git
+	branch = main
