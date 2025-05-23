@@ -1,3 +1,0 @@
-[submodule "circuitpython_applications"]
-	path = circuitpython_applications
-	url = https://github.com/silabs-CongD/circuitpython_applications.git
