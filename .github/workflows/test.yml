@@ -6,7 +6,7 @@ on:
 jobs:
 
   All-console-log:
-    if: github.repository_visibility == 'public'
+    if: github.repository_visibility != 'public'
     runs-on: ubuntu-latest
     steps:
 
