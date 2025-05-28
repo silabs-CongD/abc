@@ -1,0 +1,15 @@
+name: CI Check
+
+on:
+  push:
+
+jobs:
+
+  All-console-log:
+    if: github.repository_visibility == 'public'
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Commit
+        run: |
+          ls haha
