@@ -7,10 +7,10 @@ on:
 jobs:
 
   All-console-log:
-    if: github.repository_visibility != 'public' && !contains(github.event.pull_request.body, 'SKIP_CI')
+    # if: github.repository_visibility != 'public' && !contains(github.event.pull_request.body, 'SKIP_CI')
     runs-on: ubuntu-latest
     steps:
 
       - name: Commit
         run: |
-          ls haha
+          ls $GITHUB_WORKSPACE
