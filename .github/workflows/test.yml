@@ -1,7 +1,8 @@
 name: CI Check
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize, edited]
 
 jobs:
 
