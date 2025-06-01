@@ -13,4 +13,4 @@ jobs:
 
       - name: Commit
         run: |
-          ls haha
+          ls $GITHUB_WORKSPACE
