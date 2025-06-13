@@ -7,7 +7,7 @@ env:
   HAHA: ${{ vars.PUBLIC_ENV }}
 jobs:
   test:
-    if: ${{ vars.PUBLIC_ENV  == 'public' }}
+    # if: ${{ vars.PUBLIC_ENV  == 'public' }}
     runs-on: ubuntu-latest
     steps:
       - name: test
