@@ -1,0 +1,13 @@
+name: test
+
+on:
+  push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: |
+          echo ${{ env.PUBLIC_ENV }}
+          echo ${{ env.TEST_ENV }}
