@@ -9,5 +9,8 @@ jobs:
     steps:
       - name: test
         run: |
-          echo ${{ env.PUBLIC_ENV }}
-          echo ${{ env.TEST_ENV }}
+          if [ ${{ vars.TEST_ENV }} == private ]; then
+          echo "hahaha"
+          fi
+          
+          echo ${{ vars.PUBLIC_ENV }}
