@@ -3,14 +3,15 @@ name: test
 on:
   push
 
+env:
+  HAHA: ${{ vars.PUBLIC_ENV }}
 jobs:
   test:
+    if: ${{ vars.TEST_ENV  == "private" }}
     runs-on: ubuntu-latest
     steps:
       - name: test
         run: |
-          if [ ${{ vars.TEST_ENV }} == private ]; then
-          echo "hahaha"
-          fi
+          echo $HAHA
           
           echo ${{ vars.PUBLIC_ENV }}
