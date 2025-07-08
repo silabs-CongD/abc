@@ -102,3 +102,7 @@
 	path = circuitpython/circuitpython_applications
 	url = https://github.com/SiliconLabsSoftware/circuitpython_applications.git
 	branch = main
+[submodule "platform/peripheral-examples-wiseconnect-sdk"]
+	path = platform/peripheral-examples-wiseconnect-sdk
+	url = https://github.com/SiliconLabsSoftware/peripheral-examples-wiseconnect-sdk.git
+	branch = main
