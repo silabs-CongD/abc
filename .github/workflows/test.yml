@@ -13,7 +13,6 @@ jobs:
       - name: test
         run: |
           gh release list --repo SiliconLabs/arduino | while read -r line; do
-            tag=\$(echo "\$line" | cut -f1)
-            gh release download "\$tag" --repo SiliconLabs/arduino
-          
+            tag=$(echo "$line" | cut -f1)
+            gh release download "$tag" --repo SiliconLabs/arduino
           done
