@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: test
         run: |
-          echo $HAHA
+          gh release list --repo SiliconLabs/arduino | while read -r line; do
+            tag=\$(echo "\$line" | cut -f1)
+            gh release download "\$tag" --repo SiliconLabs/arduino
           
-          echo ${{ vars.PUBLIC_ENV }}
+          done
