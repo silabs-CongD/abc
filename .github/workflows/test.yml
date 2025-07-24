@@ -16,3 +16,5 @@ jobs:
             tag=$(echo "$line" | cut -f1)
             gh release download "$tag" --repo SiliconLabs/arduino
           done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
