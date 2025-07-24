@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: test
         run: |
-          gh release list --repo SiliconLabs/arduino | while read -r line; do
+          gh release list --repo silabs-CongD/aaa | while read -r line; do
             tag=$(echo "$line" | cut -f1)
-            gh release download "$tag" --repo SiliconLabs/arduino
+            gh release download "$tag" --repo silabs-CongD/aaa
           done
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
