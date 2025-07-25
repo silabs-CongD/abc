@@ -12,9 +12,7 @@ jobs:
     steps:
       - name: test
         run: |
-          gh release list --repo silabs-CongD/aaa | while read -r line; do
-            tag=$(echo "$line" | cut -f1)
-            gh release download "$tag" --repo silabs-CongD/aaa
-          done
+          tag=$(gh release list --repo SiliconLabsSoftware/peripheral-examples-wiseconnect-sdk --json tagName --jq '.[0].tagName')
+          echo "Processing release: $tag"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
