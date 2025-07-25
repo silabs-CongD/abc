@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: test
         run: |
-          tag=$(gh release list --repo SiliconLabsSoftware/peripheral-examples-wiseconnect-sdk --json tagName --jq '.[0].tagName')
+          tag=$(gh release list --repo SiliconLabsSoftware/bluetooth_applications --json tagName --jq '.[0].tagName')
           echo "Processing release: $tag"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
