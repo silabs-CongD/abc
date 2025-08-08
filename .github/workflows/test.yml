@@ -3,8 +3,8 @@ name: test
 on:
   push
 
-env:
-  HAHA: ${{ vars.PUBLIC_ENV }}
+# env:
+#   HAHA: ${{ vars.PUBLIC_ENV }}
 jobs:
   test:
     # if: ${{ vars.PUBLIC_ENV  == 'public' }}
@@ -12,7 +12,8 @@ jobs:
     steps:
       - name: test
         run: |
-          tag=$(gh release list --repo SiliconLabsSoftware/bluetooth_applications --json tagName --jq '.[0].tagName')
-          echo "Processing release: $tag"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
+          sudo apt-get install libjlinkarm -y
+        #   tag=$(gh release list --repo SiliconLabsSoftware/bluetooth_applications --json tagName --jq '.[0].tagName')
+        #   echo "Processing release: $tag"
+        # env:
+        #   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
