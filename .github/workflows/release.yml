@@ -47,7 +47,8 @@ jobs:
             # Create release in public repo
             gh release create "$tag" --repo "$PUBLIC_REPO" --title "$title" --notes "$notes"
           fi      
-
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
 
 
 
