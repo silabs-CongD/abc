@@ -1,0 +1,14 @@
+name: Workflow B
+
+on:
+  push:
+
+jobs:
+  workflow_B:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Workflow B
+      run: |
+        echo Test
+
+        exit 1
