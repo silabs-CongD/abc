@@ -1,0 +1,23 @@
+name: Workflow A
+
+on:
+  workflow_run:
+    workflows: ["Check-Readme-Structure", "Check-Code-Convention", "Check-Build-Firmware", "SonarQube-Scan"]
+    types:
+      - completed
+
+jobs:
+  workflow_A:
+    runs-on: ubuntu-latest
+    steps:
+    - name: check status
+      run: |
+        echo 1: ${{ github.event.workflow_run.workflow_id == 'Check-Readme-Structure' }} && ${{ github.event.workflow_run.conclusion }}
+        echo 2: ${{ github.event.workflow_run.workflow_id == 'Check-Code-Convention' }} && ${{ github.event.workflow_run.conclusion }}
+        echo 3: ${{ github.event.workflow_run.workflow_id == 'Check-Build-Firmware' }} && ${{ github.event.workflow_run.conclusion }}
+        echo 4: ${{ github.event.workflow_run.workflow_id == 'SonarQube-Scan' }} && ${{ github.event.workflow_run.conclusion }}
+
+        export sonar_result=${{ github.event.workflow_run.workflow_id == 'SonarQube-Scan' }} && ${{ github.event.workflow_run.conclusion }}
+        if [ $sonar_result == "failure" ]; then
+          echo Yessss
+        fi

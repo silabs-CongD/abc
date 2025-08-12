@@ -1,0 +1,13 @@
+name: Check-Code-Convention
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  coding_convention:
+    runs-on: ubuntu-latest
+    steps:
+    - name: coding_convention
+      run: |
+        echo Test

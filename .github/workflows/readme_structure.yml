@@ -1,0 +1,13 @@
+name: Check-Readme-Structure
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  readme_structure:
+    runs-on: ubuntu-latest
+    steps:
+    - name: readme_structure
+      run: |
+        echo Test
