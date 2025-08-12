@@ -37,8 +37,7 @@ jobs:
         echo "sonar_result=failure" >> $GITHUB_OUTPUT
         
         sleep 20
-        echo "sonar_result=success"" >> $GITHUB_OUTPUT
-        echo Done
+        echo "sonar_result=success" >> $GITHUB_OUTPUT
 
   approve:
     needs: [readme, build, sonar]
