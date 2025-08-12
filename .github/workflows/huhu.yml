@@ -29,13 +29,15 @@ jobs:
   sonar:
     runs-on: ubuntu-latest
     outputs:
-      sonar_result: ${{ github.check_sonar.outputs.sonar_result }}
+      sonar_result: ${{ steps.check_build.outputs.sonar_result }}
     steps:
     - name: Get repository name
-      id: check_sonar
+      id: check_build
       run: |
-        sleep 20
         echo "sonar_result=success" >> $GITHUB_OUTPUT
+        exit 1
+        
+        sleep 20
 
   approve:
     needs: [readme, build, sonar]
