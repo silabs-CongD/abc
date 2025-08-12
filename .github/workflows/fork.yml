@@ -1,15 +1,15 @@
 name: CI
 
 on:
-  pull_request_target:
+  pull_request:
 
 jobs:
-  build:
-    if: github.event.repository.fork == false
+  skip-if-fork:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Run build
-        run: echo "Running build on non-forked repo"
+      - name: Run your steps
+        run: echo "This PR is from the same repo, running workflow..."
