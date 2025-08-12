@@ -1,14 +1,11 @@
 name: test
 
 on:
-  push:
+  pull_request_target:
 
 jobs:
   readme:
     runs-on: ubuntu-latest
-    outputs:
-      repo: ${{ steps.check.outputs.repo }}
-      # app_token: ${{ steps.
     steps:
     - name: Get repository name
       id: check
@@ -19,12 +16,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      build_result: ${{ steps.build_result.outputs.build_result }}
+      build_result: ${{ steps.check_build.outputs.build_result }}
     steps:
     - name: Get repository name
-      id: build_result
+      id: check_build
       run: |
-        echo ${{ needs.git_check_change.outputs.repo }}
         echo "build_result=success" >> $GITHUB_OUTPUT
         exit 1
         
@@ -33,13 +29,13 @@ jobs:
   sonar:
     runs-on: ubuntu-latest
     outputs:
-      sonar_result: ${{ github.check_sonar.outputs.check_sonar }}
+      sonar_result: ${{ github.check_sonar.outputs.sonar_result }}
     steps:
     - name: Get repository name
       id: check_sonar
       run: |
         sleep 20
-        echo "check_sonar=success" >> $GITHUB_OUTPUT
+        echo "sonar_result=success" >> $GITHUB_OUTPUT
 
   approve:
     needs: [readme, build, sonar]
@@ -48,5 +44,5 @@ jobs:
     steps:
     - name: Get repository name
       run: |
-        echo ${{ needs.build.outputs.build_result }} 
-        echo ${{ needs.sonar.outputs.sonar_result }}
+        echo build:${{ needs.build.outputs.build_result }} 
+        echo sonar:${{ needs.sonar.outputs.sonar_result }}
