@@ -1,0 +1,55 @@
+name: test
+
+on:
+  push:
+
+jobs:
+  git_check_change:
+    runs-on: ubuntu-latest
+    outputs:
+      repo: ${{ steps.check.outputs.repo }}
+      # app_token: ${{ steps.
+    steps:
+    - name: Get repository name
+      id: check
+      run: |
+        REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d "/" -f 2)
+        echo "repo=$REPO_NAME" >> $GITHUB_OUTPUT
+  
+  build:
+    needs: git_check_change
+    runs-on: ubuntu-latest
+    outputs:
+      build_result: ${{ steps.build_result.outputs.build_result }}
+    steps:
+    # - name: Checkout code repository
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: ${{ github.repository  }}
+    #     token: ${{ steps.app-token.outputs.token }}
+    #     path: 'projects'
+        
+    - name: Get repository name
+      id: build_result
+      run: |
+        echo ${{ needs.git_check_change.outputs.repo }}
+        echo "build_result=success" >> $GITHUB_OUTPUT
+        exit 1
+        
+        sleep 50
+      continue-on-error: true
+  test:
+    needs: git_check_change
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get repository name
+      run: |
+        echo $repo
+        sleep 20
+  approve:
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get repository name
+      run: |
+        echo echo ${{ needs.build.outputs.build_result }} 
