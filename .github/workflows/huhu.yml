@@ -1,10 +1,10 @@
 name: test
 
 on:
-  workflow_dispatch:
+  pull_request_target:
 
 jobs:
-  git_check_change:
+  readme:
     runs-on: ubuntu-latest
     outputs:
       repo: ${{ steps.check.outputs.repo }}
@@ -17,18 +17,10 @@ jobs:
         echo "repo=$REPO_NAME" >> $GITHUB_OUTPUT
   
   build:
-    needs: git_check_change
     runs-on: ubuntu-latest
     outputs:
       build_result: ${{ steps.build_result.outputs.build_result }}
     steps:
-    # - name: Checkout code repository
-    #   uses: actions/checkout@v4
-    #   with:
-    #     repository: ${{ github.repository  }}
-    #     token: ${{ steps.app-token.outputs.token }}
-    #     path: 'projects'
-        
     - name: Get repository name
       id: build_result
       run: |
@@ -37,19 +29,24 @@ jobs:
         exit 1
         
         sleep 50
-      continue-on-error: true
-  test:
-    needs: git_check_change
+  
+  sonar:
     runs-on: ubuntu-latest
+    outputs:
+      sonar_result: ${{ github.check_sonar.outputs.check_sonar }}
     steps:
     - name: Get repository name
+      id: check_sonar
       run: |
-        echo $repo
         sleep 20
+        echo "check_sonar=success" >> $GITHUB_OUTPUT
+
   approve:
-    needs: [build, test]
+    needs: [readme, build, sonar]
+    if: always()
     runs-on: ubuntu-latest
     steps:
     - name: Get repository name
       run: |
-        echo echo ${{ needs.build.outputs.build_result }} 
+        echo ${{ needs.build.outputs.build_result }} 
+        echo ${{ needs.sonar.outputs.sonar_result }}
