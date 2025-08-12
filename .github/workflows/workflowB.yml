@@ -11,4 +11,6 @@ jobs:
       run: |
         echo Test
 
+        echo 20
+        
         exit 1
