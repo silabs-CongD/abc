@@ -19,7 +19,7 @@ jobs:
           fi
 
       - name: Run only if not skipped
-        if: $ {{ steps.condition.outputs.skip != 'true' }} && github.repository_visibility != 'public'
+        if: ${{ steps.condition.outputs.skip != 'true' }} && github.repository_visibility != 'public'
         run: echo "Running main step because skip is false"
 
       - name: This step is skipped if skip is true
