@@ -1,17 +1,26 @@
-name: CI
+name: Conditional Workflow
 
-on:
-  push:
+on: [push]
 
 jobs:
-  haha:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Run your steps
-        run: exit 0
-        
-      - name: Run your steps
-        run: echo "Must skip hereeeee"
+        uses: actions/checkout@v3
+
+      - name: Check condition
+        id: condition
+        run: |
+          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+
+      - name: Run only if not skipped
+        if: steps.condition.outputs.skip != 'true' && github.repository_visibility != 'public'
+        run: echo "Running main step because skip is false"
+
+      - name: This step is skipped if skip is true && github.repository_visibility == 'public'
+        if: steps.condition.outputs.skip != 'true'
+        run: echo "Another step that runs only if not skipped"
