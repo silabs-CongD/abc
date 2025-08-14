@@ -77,12 +77,6 @@ else
     exit 0
 fi
 
-# Print code spell
-printf '<h2>Code spell check</h2>\n'
-echo "<pre>"
-cat result_codespell.log
-echo "</pre>"
-
 # Skip check _config.h files
 grep -v "/config/\\|application_ui" list_files.txt > uncrustify_list.txt
 printf '<h2>Summary Information</h2>\n'
@@ -94,6 +88,12 @@ fi
 
 # Found any source files here. We run uncrustify to check coding style
 check_coding uncrustify_list.txt
+
+# Print code spell
+printf '<h2>Code spell check</h2>\n'
+echo "<pre>"
+cat result_codespell.log
+echo "</pre>"
 
 if ! [ -s uncrustify_formatted_list.txt ]; then
     printf '<ul><li><p style="color:green; !important">All tests passed</p></li>\n</ul>\n'
