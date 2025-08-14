@@ -15,7 +15,7 @@ function check_coding() {
     while IFS= read -r line; do
         echo 1111
         echo $line
-        codespell $line -w --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log
+        codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log
     done < $list_file
 
     # Failing build, we will send logs and the formatted files to output
@@ -74,7 +74,7 @@ if [ $check -gt 0 ]; then
     check=0
 else
     printf '<h2>Only config .h files. Ignored check coding style.</h2>'
-    # exit 0
+    exit 0
 fi
 
 # Skip check _config.h files
@@ -90,6 +90,7 @@ fi
 check_coding uncrustify_list.txt
 
 # Print code spell
+# Dont use -w because, sometime tool not correct. If use -w, it will auto update wrong code.
 printf '<h2>Code spell check</h2>\n'
 echo "<pre>"
 cat result_codespell.log
