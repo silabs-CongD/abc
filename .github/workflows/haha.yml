@@ -1,0 +1,16 @@
+name: Conditional Workflow
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: silabs-CongD/abc_staging
+          ref: master
+          token: ${{ secrets.PAT_TOKEN }}
