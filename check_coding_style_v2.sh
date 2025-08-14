@@ -50,7 +50,7 @@ font-size: 1.1em;
 <h1>Coding Style Report</h1>
 <p><a href="https://github.com/uncrustify/uncrustify"> The Uncrustify</a> is used to check the coding standard.</p>
 <p>The developer should ensure that their code follows all of the <a href="https://github.com/SiliconLabs/training_examples_staging/wiki/coding-standard"> 32-bit coding standard.
-</p>
+</a></p>
 '''
 # Get the source files in the changed projects
 file="$1"
@@ -93,7 +93,7 @@ fi
 # Code spell check
 git_diff=$WORKSPACE/projects/git_diff.txt
 while IFS= read -r line; do
-    codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log
+    codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log 2>/dev/null
 done < $git_diff
     
 printf '<h2>Code spell check</h2>\n'
