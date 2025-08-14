@@ -13,8 +13,10 @@ function check_coding() {
 
     # Code spell check
     while IFS= read -r line; do
+        echo 1111
+        echo $line
         codespell $line -w --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log
-    done < "$list_file"
+    done < $list_file
 
     # Failing build, we will send logs and the formatted files to output
     if [ -s uncrustify_formatted_list.txt ]; then
