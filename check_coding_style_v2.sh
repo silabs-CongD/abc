@@ -55,6 +55,7 @@ font-size: 1.1em;
 <h1>Coding Style Report</h1>
 <p><a href="https://github.com/uncrustify/uncrustify"> The Uncrustify</a> is used to check the coding standard.</p>
 <p>The developer should ensure that their code follows all of the <a href="https://github.com/SiliconLabs/training_examples_staging/wiki/coding-standard"> 32-bit coding standard.
+</p>
 '''
 # Get the source files in the changed projects
 file="$1"
@@ -74,9 +75,14 @@ else
     exit 0
 fi
 
+# Print code spell
+printf '<h2>Code spell check</h2>\n'
+echo "<pre>"
+cat result_codespell.log
+echo "</pre>"
+
 # Skip check _config.h files
 grep -v "/config/\\|application_ui" list_files.txt > uncrustify_list.txt
-
 printf '<h2>Summary Information</h2>\n'
 
 if ! [ -s uncrustify_list.txt ]; then
@@ -121,11 +127,5 @@ find "./uncrustify_formatted_files" -type f -name "*.log" | while read -r file; 
     cat "$file"
     echo "</pre>"
 done
-
-# Print code spell
-echo '<h4>Code spell check</h4>'
-echo "<pre>"
-cat result_codespell.log
-echo "</pre>"
 
 printf '</body></html>\n'
