@@ -1,9 +1,9 @@
 name: test
 
 on:
-  push:
-  # pull_request_target:
-  #   types: [opened, edited, synchronize]
+  # push:
+  pull_request:
+    types: [opened, edited, synchronize]
 jobs:
   readme:
     runs-on: ubuntu-latest
