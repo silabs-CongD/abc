@@ -1,28 +1,16 @@
 name: Conditional Workflow
 
-on: 
+on:
   pull_request:
+    types: [opened, edited, synchronize]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Check condition
-        id: condition
-        run: |
-          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
-            echo "skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: private
-        if: steps.condition.outputs.skip != 'true' && github.repository_visibility != 'public'
-        run: echo "Running main step because skip is false"
-
-      - name: public
-        if: ${{ steps.condition.outputs.skip != 'true' }} && github.repository_visibility == 'public'
-        run: echo "Another step that runs only if not skipped"
+        uses: actions/checkout@v4
+        with:
+          repository: silabs-CongD/abc_staging
+          ref: master
+          token: ${{ secrets.PAT_TOKEN }}
