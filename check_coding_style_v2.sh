@@ -13,8 +13,6 @@ function check_coding() {
 
     # Code spell check
     while IFS= read -r line; do
-        echo 1111
-        echo $line
         codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log
     done < $list_file
 
@@ -89,18 +87,18 @@ fi
 # Found any source files here. We run uncrustify to check coding style
 check_coding uncrustify_list.txt
 
+if ! [ -s uncrustify_formatted_list.txt ]; then
+    printf '<ul><li><p style="color:green; !important">All tests passed</p></li>\n</ul>\n'
+else
+    printf '<ul><li><p><span style="color:red; !important">Some tests failed.</span> See <strong>Check logs</strong> for details.</p></li></ul>\n'
+fi
+
 # Print code spell
 # Dont use -w because, sometime tool not correct. If use -w, it will auto update wrong code.
 printf '<h2>Code spell check</h2>\n'
 echo "<pre>"
 cat result_codespell.log
 echo "</pre>"
-
-if ! [ -s uncrustify_formatted_list.txt ]; then
-    printf '<ul><li><p style="color:green; !important">All tests passed</p></li>\n</ul>\n'
-else
-    printf '<ul><li><p><span style="color:red; !important">Some tests failed.</span> See <strong>Check logs</strong> for details.</p></li></ul>\n'
-fi
 
 printf '<h3>Source files are found:</h3>\n<ul>\n'
 lines=$(cat uncrustify_list.txt)
