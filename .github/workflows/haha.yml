@@ -1,8 +1,7 @@
 name: Conditional Workflow
 
 on:
-  pull_request:
-    types: [opened, edited, synchronize]
+  push:
     
 jobs:
   build:
@@ -14,3 +13,9 @@ jobs:
           repository: silabs-CongD/abc_staging
           ref: master
           token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Install codespell
+        run : |
+          pip install codespell
+
+          codespell .
