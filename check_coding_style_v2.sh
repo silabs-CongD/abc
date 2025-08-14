@@ -74,7 +74,7 @@ if [ $check -gt 0 ]; then
     check=0
 else
     printf '<h2>Only config .h files. Ignored check coding style.</h2>'
-    exit 0
+    # exit 0
 fi
 
 # Skip check _config.h files
