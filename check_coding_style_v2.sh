@@ -11,11 +11,6 @@ function check_coding() {
     $UNCRUSTIFY_PATH -c $CFG_PATH -l C --replace -F $list_file &> debug.log
     git diff --name-only > uncrustify_formatted_list.txt
 
-    # Code spell check
-    while IFS= read -r line; do
-        codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log
-    done < $list_file
-
     # Failing build, we will send logs and the formatted files to output
     if [ -s uncrustify_formatted_list.txt ]; then
         mkdir uncrustify_formatted_files
@@ -95,6 +90,12 @@ fi
 
 # Print code spell
 # Dont use -w because, sometime tool not correct. If use -w, it will auto update wrong code.
+# Code spell check
+git_diff=$WORKSPACE/projects/git_diff.txt
+while IFS= read -r line; do
+    codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log
+done < $git_diff
+    
 printf '<h2>Code spell check</h2>\n'
 echo "<pre>"
 cat result_codespell.log
