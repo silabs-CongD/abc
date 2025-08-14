@@ -94,13 +94,13 @@ fi
 git_diff=$WORKSPACE/projects/git_diff.txt
 while IFS= read -r line; do
     codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log 2>/dev/null
-    status=$?
-    if [ $status -gt 0 ]; then
-        echo "<p>failed codespell</p>"
-    fi
+    let status+=$?
 done < $git_diff
     
 printf '<h2>Code spell check</h2>\n'
+if [ $status -gt 0 ]; then
+    echo "<p>codespell check: failed</p>"
+fi
 echo "<pre>"
 cat result_codespell.log
 echo "</pre>"
