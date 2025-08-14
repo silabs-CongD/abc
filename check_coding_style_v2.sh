@@ -72,7 +72,7 @@ fi
 
 # Skip check _config.h files
 grep -v "/config/\\|application_ui" list_files.txt > uncrustify_list.txt
-printf '<h2>Summary Information</h2>\n'
+printf '<h2>Coding Convention Information</h2>\n'
 
 if ! [ -s uncrustify_list.txt ]; then
     printf '<ul><li><p><span style="color:red; !important">Some tests failed</span>. No source files found.</p></li>\n</ul>\n</body></html>\n'
@@ -97,9 +97,9 @@ while IFS= read -r line; do
     let status+=$?
 done < $git_diff
     
-printf '<h2>Code spell check</h2>\n'
+printf '<h2>Code Spell Check</h2>\n'
 if [ $status -gt 0 ]; then
-    echo "<p>codespell check: failed</p>"
+    echo "<p>Result: failed</p>"
 fi
 echo "<pre>"
 cat result_codespell.log
