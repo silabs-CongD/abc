@@ -91,10 +91,6 @@ fi
 # Print code spell
 # Dont use -w because, sometime tool not correct. If use -w, it will auto update wrong code.
 # Code spell check
-codespell --config D:/aaa/codespell/.codespellrc > haha.log 2>/dev/null
-status=$?
-# Now $status holds the exit code, but nothing is printed
-
 git_diff=$WORKSPACE/projects/git_diff.txt
 while IFS= read -r line; do
     codespell $line --config $ABS_PATH/tools/codespell/.codespellrc &>> result_codespell.log 2>/dev/null
