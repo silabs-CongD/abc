@@ -1,9 +1,9 @@
 name: test
 
 on:
-  # push:
-  pull_request:
-    types: [opened, edited, synchronize]
+  push:
+  # pull_request:
+  #   types: [opened, edited, synchronize]
 jobs:
   readme:
     runs-on: ubuntu-latest
@@ -40,22 +40,28 @@ jobs:
         sleep 10
         echo "sonar_result=success" >> $GITHUB_OUTPUT
 
-  approve_public:
-    needs: [readme, build]
-    if: always() && github.repository_visibility == 'public'
+  approve:
+    needs: ${{ github.repository_visibility == 'public' && fromJson('["readme", "build"]') || fromJson('["readme", "build", "sonar"]') }}
+    if: always()
     runs-on: ubuntu-latest
     steps:
-    - name: Get repository name
-      run: |
-        echo build:${{ needs.build.outputs.build_result }} 
-        echo sonar:${{ needs.sonar.outputs.sonar_result }}
+      - name: Step for public repo
+        if: github.repository_visibility == 'public'
+        run: echo "Public repo logic"
+
+      - name: Step for private repo
+        if: github.repository_visibility != 'public'
+        run: |
+          echo "Private repo logic"
+          echo build:${{ needs.build.outputs.build_result }} 
+          echo sonar:${{ needs.sonar.outputs.sonar_result }}
         
-  approve_internal:
-    needs: [readme, build, sonar]
-    if: always() && github.repository_visibility != 'public'
-    runs-on: ubuntu-latest
-    steps:
-    - name: Get repository name
-      run: |
-        echo build:${{ needs.build.outputs.build_result }} 
-        echo sonar:${{ needs.sonar.outputs.sonar_result }}
+  # approve_internal:
+  #   needs: [readme, build, sonar]
+  #   if: always() && github.repository_visibility != 'public'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Get repository name
+  #     run: |
+  #       echo build:${{ needs.build.outputs.build_result }} 
+  #       echo sonar:${{ needs.sonar.outputs.sonar_result }}
