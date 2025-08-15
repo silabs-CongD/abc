@@ -98,6 +98,7 @@ while IFS= read -r line; do
 done < $git_diff
     
 printf '<h2>Code Spell Check</h2>\n'
+echo $pwd
 if [ $status -gt 0 ]; then
     printf '<ul><li><p style="color:red; !important">Result: failed</p></li>\n</ul>'
     echo "<p><b>**NOTE**</b> The tool may not detect abbreviation words correctly.</p>"
