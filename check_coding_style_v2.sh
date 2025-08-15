@@ -98,10 +98,11 @@ while IFS= read -r line; do
 done < $git_diff
     
 printf '<h2>Code Spell Check</h2>\n'
-# Sometime tool work not correct, so set failed is not true.
-# if [ $status -gt 0 ]; then
-#     echo "<p>Result: failed</p>"
-# fi
+if [ $status -gt 0 ]; then
+    echo "<p>Result: failed</p>"
+    echo "<p><b>**NOTE:**</b>The tool may not detect abbreviation words correctly.</p>"
+    echo "<p>If you notice any incorrect detections, please contact me so I can add those words to the ignore list:silabs-CongD</p>"
+fi
 echo "<pre>"
 cat result_codespell.log
 echo "</pre>"
