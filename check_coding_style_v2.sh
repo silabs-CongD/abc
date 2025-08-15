@@ -99,10 +99,10 @@ done < $git_diff
     
 printf '<h2>Code Spell Check</h2>\n'
 if [ $status -gt 0 ]; then
-    printf '<ul><li><p style="color:red; !important">Result: failed</p></li>\n</ul>\n'
-    echo "<p><b>**NOTE**</b> The tool may not detect abbreviation words correctly.</p>\n"
+    printf '<ul><li><p style="color:red; !important">Result: failed</p></li>\n</ul>'
+    echo "<p><b>**NOTE**</b> The tool may not detect abbreviation words correctly.</p>"
     echo "If you notice any incorrect detections, please contact me so I can add those words to the ignore list: silabs-CongD"
-    echo "<p>Here is the list of failed failes:</p>\n"
+    echo "<p>Here is the list of failed files:</p>"
 else
     printf '<ul><li><p style="color:green; !important">Result: success</p></li>\n</ul>\n'
 fi
