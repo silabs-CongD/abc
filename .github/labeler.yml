@@ -15,9 +15,9 @@ Documentation:
   - any-glob-to-any-file: docs/**
 
 # Add 'Documentation' label to any file changes within 'docs' folder
-Documentation:
-- changed-files:
-  - any-glob-to-any-file: docs/*
+# Documentation:
+# - changed-files:
+#   - any-glob-to-any-file: docs/*
 
 # Add 'Documentation' label to any file changes within 'docs' or 'guides' folders
 Documentation:
