@@ -2,7 +2,10 @@ name: 'Pull Request Labeler'
 on:
   pull_request_target:
     types: [opened, edited, synchronize]
-
+permissions:
+  contents: read
+  pull-requests: write
+  
 jobs:
   triage:
     runs-on: ubuntu-24.04
