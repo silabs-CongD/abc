@@ -1,13 +1,13 @@
 # Add 'root' label to any root file changes
 # Quotation marks are required for the leading asterisk
-root:
+enhancement:
 - changed-files:
   - any-glob-to-any-file: '*'
 
 # Add 'AnyChange' label to any changes within the entire repository
-AnyChange:
-- changed-files:
-  - any-glob-to-any-file: '**'
+# AnyChange:
+# - changed-files:
+#   - any-glob-to-any-file: '**'
 
 # Add 'Documentation' label to any changes within 'docs' folder or any subfolders
 # Documentation:
@@ -32,21 +32,21 @@ AnyChange:
 #   - any-glob-to-any-file: ['docs/*', 'guides/*']
 
 # Add 'Documentation' label to any change to .md files within the entire repository 
-Documentation:
+documentation:
 - changed-files:
   - any-glob-to-any-file: '**/*.md, *.md'
 
 # Add 'source' label to any change to src files within the source dir EXCEPT for the docs sub-folder
-source:
-- all:
-  - changed-files:
-    - any-glob-to-any-file: 'src/**/*'
-    - all-globs-to-all-files: '!src/docs/*'
+# source:
+# - all:
+#   - changed-files:
+#     - any-glob-to-any-file: 'src/**/*'
+#     - all-globs-to-all-files: '!src/docs/*'
 
 # Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
-feature:
- - head-branch: ['^feature', 'feature']
+# feature:
+#  - head-branch: ['^feature', 'feature']
 
 # Add 'release' label to any PR that is opened against the `main` branch
-release:
- - base-branch: 'main'
+# release:
+#  - base-branch: 'main'
