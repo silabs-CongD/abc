@@ -1,16 +1,13 @@
-name: Conditional Workflow
-
+name: 'Pull Request Labeler'
 on:
   pull_request:
     types: [opened, edited, synchronize]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  triage:
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/labeler@v5.0.0 # v5.0.0
         with:
-          repository: silabs-CongD/abc_staging
-          ref: master
-          token: ${{ secrets.PAT_TOKEN }}
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          sync-labels: true
