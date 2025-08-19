@@ -1,0 +1,25 @@
+name: test
+
+on:
+  push:
+
+permissions:
+  contents: read
+  pull-requests: write
+  
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+
+      # - name: Checkout repo
+      #   uses: actions/checkout@v4
+
+      - name: Do sync
+        run: |
+          
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/silabs-CongD/abc/pulls/4/requested_reviewers \
+            -d '{"reviewers": ["congneb"]}'
