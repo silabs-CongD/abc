@@ -21,12 +21,13 @@ jobs:
 
           git clone https://github.com/silabs-CongD/abc.git --branch=conan
           cd abc
-          echo ==============================
+          
           conan profile detect
+          echo ==============================
           conan create .
           echo ==============================
-          ls test_package/build
-
+          ls test_package/build/gcc-13-x86_64-gnu17-release
+          ./example
       # - name: Do sync
       #   run: |
           
