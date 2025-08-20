@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: test
+      - name: test conan case1
         run: |
           pip3 install conan
           conan --version
@@ -20,8 +20,7 @@ jobs:
           cmake --version
 
           git clone https://github.com/silabs-CongD/abc.git --branch=conan
-          cd abc
-          
+          cd abc/conan_case1
           conan profile detect
           echo ==============================
           conan create .
@@ -29,6 +28,18 @@ jobs:
           echo ==============================
           ls test_package/build/gcc-13-x86_64-gnu17-release
           ./test_package/build/gcc-13-x86_64-gnu17-release/example
+
+      - name: test conan case2
+        run: |
+          cd abc/conan_case2
+          conan profile detect
+          echo ==============================
+          conan install . --build=missing
+          echo ==============================
+          echo ==============================
+          cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+          cmake --build .
+          ./example
       # - name: Do sync
       #   run: |
           
