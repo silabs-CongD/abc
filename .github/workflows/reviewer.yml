@@ -31,10 +31,10 @@ jobs:
           
           echo 111==============================
           cd test_package
-          conan create . --build=missing
-          ls .
-
-
+          conan install . --build=missing
+          cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
+          cmake --build .
+          ./test_package
 
       # - name: Do sync
       #   run: |
