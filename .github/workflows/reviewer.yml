@@ -25,7 +25,7 @@ jobs:
           conan profile detect
           conan create . -s build_type=Release
           echo ==============================
-          conan list mycpplib/1.0:* --format=json
+          # conan list mycpplib/1.0:* --format=json
           echo ==============================
           conan cache path mycpplib/1.0
           
