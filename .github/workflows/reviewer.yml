@@ -26,8 +26,9 @@ jobs:
           echo ==============================
           conan create .
           echo ==============================
+          echo ==============================
           ls test_package/build/gcc-13-x86_64-gnu17-release
-          ./example
+          ./test_package/build/gcc-13-x86_64-gnu17-release/example
       # - name: Do sync
       #   run: |
           
