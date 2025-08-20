@@ -1,6 +1,9 @@
 from conan import ConanFile
 from conan.tools.cmake import CMake, cmake_layout
 
+from conan.tools.files import copy
+import os
+
 class MyCppLibConan(ConanFile):
     name = "mycpplib"
     version = "1.0"
@@ -24,11 +27,11 @@ class MyCppLibConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy("*.h", dst="include", src="include")
-        self.copy("*.lib", dst="lib", keep_path=False)
-        self.copy("*.a", dst="lib", keep_path=False)
-        self.copy("*.so", dst="lib", keep_path=False)
-        self.copy("*.dylib*", dst="lib", keep_path=False)
+        copy(self, "*.h", dst=os.path.join(self.package_folder, "include"), src=os.path.join(self.source_folder, "include"))
+        copy(self, "*.lib", dst=os.path.join(self.package_folder, "lib"), src=self.build_folder, keep_path=False)
+        copy(self, "*.a", dst=os.path.join(self.package_folder, "lib"), src=self.build_folder, keep_path=False)
+        copy(self, "*.so", dst=os.path.join(self.package_folder, "lib"), src=self.build_folder, keep_path=False)
+        copy(self, "*.dylib*", dst=os.path.join(self.package_folder, "lib"), src=self.build_folder, keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = ["mylib"]
