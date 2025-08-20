@@ -24,6 +24,8 @@ jobs:
           echo ==============================
           conan profile detect
           conan create . -s build_type=Release
+          echo ==============================
+          conan get hello/1.0 --info
 
       - name: Do sync
         run: |
