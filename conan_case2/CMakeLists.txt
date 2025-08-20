@@ -1,6 +1,7 @@
-
 cmake_minimum_required(VERSION 3.15)
-project(hello)
+project(test_project)
 
-add_library(hello src/hello.cpp)
-target_include_directories(hello PUBLIC include)
+find_package(hello REQUIRED CONFIG)
+
+add_executable(example main.cpp)
+target_link_libraries(example hello::hello)
