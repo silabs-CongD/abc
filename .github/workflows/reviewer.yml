@@ -23,18 +23,9 @@ jobs:
           cd abc
           echo ==============================
           conan profile detect
-          conan create . -s build_type=Release
+          conan create .
           echo ==============================
-          # conan list mycpplib/1.0:* --format=json
-          echo ==============================
-          conan cache path mycpplib/1.0
-          
-          echo 111==============================
-          cd test_package
-          conan install . --build=missing
-          cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
-          cmake --build .
-          ./test_package
+          ls test_package/build
 
       # - name: Do sync
       #   run: |
