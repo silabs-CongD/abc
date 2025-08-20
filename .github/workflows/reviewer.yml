@@ -25,7 +25,10 @@ jobs:
           conan profile detect
           conan create . -s build_type=Release
           echo ==============================
-          conan get hello/1.0 --info
+          conan list hello/1.0:* --format=json
+          echo ==============================
+          conan cache path hello/1.0
+
 
       - name: Do sync
         run: |
