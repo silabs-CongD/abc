@@ -32,8 +32,6 @@ jobs:
       - name: test conan case2
         run: |
           cd abc/conan_case2
-          conan profile detect
-          echo ==============================
           conan install . --build=missing
           echo ==============================
           echo ==============================
