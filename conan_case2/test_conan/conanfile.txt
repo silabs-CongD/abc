@@ -1,0 +1,6 @@
+[requires]
+hello/0.2
+
+[generators]
+CMakeToolchain
+CMakeDeps
