@@ -4,19 +4,14 @@ from conan.tools.cmake import CMake, cmake_layout
 from conan.tools.files import copy
 import os
 
-class MyCppLibConan(ConanFile):
-    name = "mycpplib"
-    version = "1.0"
-    package_type = "library"
+
+class HelloConan(ConanFile):
+    name = "hello"
+    version = "0.1"
     settings = "os", "compiler", "build_type", "arch"
-    options = {
-        "shared": [True, False]
-    }
-    default_options = {
-        "shared": False
-    }
+    exports_sources = "src/*", "include/*", "CMakeLists.txt"
     generators = "CMakeToolchain", "CMakeDeps"
-    exports_sources = "CMakeLists.txt", "src/*", "include/*"
+
 
     def layout(self):
         cmake_layout(self)
@@ -34,4 +29,4 @@ class MyCppLibConan(ConanFile):
         copy(self, "*.dylib*", dst=os.path.join(self.package_folder, "lib"), src=self.build_folder, keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["mylib"]
+        self.cpp_info.libs = ["hello"]

@@ -1,5 +1,0 @@
-[requires]
-mycpplib/1.0
-
-[generators]
-CMakeToolchain
