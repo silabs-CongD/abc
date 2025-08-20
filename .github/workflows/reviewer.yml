@@ -28,13 +28,15 @@ jobs:
           conan list hello/1.0:* --format=json
           echo ==============================
           conan cache path hello/1.0
+          echo ==============================
+          find /home/runner/.conan2/p/b -type f
 
 
-      - name: Do sync
-        run: |
+      # - name: Do sync
+      #   run: |
           
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/silabs-CongD/abc/pulls/4/requested_reviewers \
-            -d '{"reviewers": ["congneb"]}'
+      #     curl -X POST \
+      #       -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+      #       -H "Accept: application/vnd.github+json" \
+      #       https://api.github.com/repos/silabs-CongD/abc/pulls/4/requested_reviewers \
+      #       -d '{"reviewers": ["congneb"]}'
