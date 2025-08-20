@@ -14,9 +14,9 @@ jobs:
 
       - name: test
         run: |
-          pip3 install conan -y
+          pip3 install conan
           conan --version
-          pip3 install cmake -y
+          pip3 install cmake
           cmake --version
 
           git clone https://github.com/silabs-CongD/abc.git --branch=conan
