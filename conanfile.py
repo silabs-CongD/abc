@@ -1,14 +1,13 @@
 from conan import ConanFile
 from conan.tools.cmake import CMake, cmake_layout
 
-class HelloConan(ConanFile):
-    name = "hello"
+class MyCppLibConan(ConanFile):
+    name = "mycpplib"
     version = "1.0"
+    package_type = "library"
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps"
-    exports_sources = "CMakeLists.txt", "src/*"
-    # win_bash = True
-
+    exports_sources = "CMakeLists.txt", "src/*", "include/*"
 
     def layout(self):
         cmake_layout(self)
@@ -19,8 +18,9 @@ class HelloConan(ConanFile):
         cmake.build()
 
     def package(self):
-        cmake = CMake(self)
-        cmake.install()
+        self.copy("*.h", dst="include", src="include")
+        self.copy("*.lib", dst="lib", keep_path=False)
+        self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["hello"]
+        self.cpp_info.libs = ["mylib"]
