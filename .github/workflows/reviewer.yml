@@ -12,8 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # - name: Checkout repo
-      #   uses: actions/checkout@v4
+      - name: test
+        run: |
+          pip3 install conan -y
+          conan --version
+          pip3 install cmake -y
+          cmake --version
+
+          git clone https://github.com/silabs-CongD/abc.git --branch=conan
+          cd abc
+          conan create . -s build_type=Release
 
       - name: Do sync
         run: |
