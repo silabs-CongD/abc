@@ -25,11 +25,9 @@ jobs:
           conan profile detect
           conan create . -s build_type=Release
           echo ==============================
-          conan list hello/1.0:* --format=json
+          conan list mycpplib/1.0:* --format=json
           echo ==============================
-          conan cache path hello/1.0
-          echo ==============================
-          find /home/runner/.conan2/p/b -type f
+          conan cache path mycpplib/1.0
           
           echo 111==============================
           cd test_package
