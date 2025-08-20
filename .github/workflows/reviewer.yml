@@ -30,6 +30,9 @@ jobs:
           conan cache path hello/1.0
           echo ==============================
           find /home/runner/.conan2/p/b -type f
+          echo 111==============================
+          conan install hello/1.0@ -g CMakeDeps -g CMakeToolchain
+
 
 
       # - name: Do sync
