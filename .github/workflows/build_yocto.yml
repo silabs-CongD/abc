@@ -17,6 +17,8 @@ jobs:
 
     - name: Set up Yocto environment
       run: |
+        export BB_SANDBOX=0
+        
         git clone https://github.com/yoctoproject/poky.git
         cd poky
         git checkout kirkstone
