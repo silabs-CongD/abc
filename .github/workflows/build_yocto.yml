@@ -6,31 +6,35 @@ on:
 jobs:
   build-yocto:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Project Repo
-      uses: actions/checkout@v4
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-
-    - name: Run Yocto build in Docker
+    - name: Install dependencies
       run: |
-        docker run --rm -v ${{ github.workspace }}:/workspace --workdir /workspace pokybuild/poky:4.0 bash -c "
-          set -ex
-          git clone https://github.com/yoctoproject/poky.git
-          cd poky
-          git checkout kirkstone
-          source oe-init-build-env
-          git clone git://git.yoctoproject.org/meta-raspberrypi ../meta-raspberrypi
-          echo 'MACHINE = \"raspberrypi4\"' >> conf/local.conf
-          echo 'IMAGE_INSTALL_append = \" nano curl openssh\"' >> conf/local.conf
-          echo 'BBLAYERS += \"\${TOPDIR}/../meta-raspberrypi\"' >> conf/bblayers.conf
-          bitbake core-image-base
-        "
+        sudo apt update
+        sudo apt install -y gawk wget git-core diffstat unzip texinfo \
+          gcc-multilib build-essential chrpath socat cpio python3 python3-pip \
+          python3-pexpect xz-utils debianutils iputils-ping libsdl1.2-dev \
+          xterm zstd liblz4-tool
+
+    - name: Set up Yocto environment
+      run: |
+        git clone https://github.com/yoctoproject/poky.git
+        cd poky
+        git checkout kirkstone
+        source oe-init-build-env
+
+        git clone git://git.yoctoproject.org/meta-raspberrypi ../meta-raspberrypi
+        echo 'MACHINE = "raspberrypi4"' >> conf/local.conf
+        echo 'IMAGE_INSTALL_append = " nano curl openssh"' >> conf/local.conf
+
+        echo 'BBLAYERS += "${TOPDIR}/../meta-raspberrypi"' >> conf/bblayers.conf
+
+    - name: Build image
+      run: |
+        source poky/oe-init-build-env
+        bitbake core-image-base
 
     - name: Upload image artifact
       uses: actions/upload-artifact@v4
       with:
         name: yocto-rpi-image
-        path: poky/build/tmp/deploy/images/raspberrypi4/
+        path: build/tmp/deploy/images/raspberrypi4/
