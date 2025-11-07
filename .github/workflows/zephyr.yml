@@ -29,10 +29,10 @@ jobs:
       - name: Zephyr SDK
         run: |
             cd ~
-            wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+            wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz > /dev/null 2>&1
             wget -O - https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/sha256.sum | shasum --check --ignore-missing
             
-            tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+            tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz > /dev/null 2>&1
             cd zephyr-sdk-0.17.4
             ./setup.sh
 
