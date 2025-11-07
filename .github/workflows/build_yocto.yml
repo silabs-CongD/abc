@@ -17,18 +17,11 @@ jobs:
 
     - name: Set up Yocto environment
       run: |
-        export BB_SANDBOX=0
-        
-        git clone https://github.com/yoctoproject/poky.git
-        cd poky
-        git checkout kirkstone
-        source oe-init-build-env
-
-        git clone git://git.yoctoproject.org/meta-raspberrypi ../meta-raspberrypi
-        echo 'MACHINE = "raspberrypi4"' >> conf/local.conf
-        echo 'IMAGE_INSTALL_append = " nano curl openssh"' >> conf/local.conf
-
-        echo 'BBLAYERS += "${TOPDIR}/../meta-raspberrypi"' >> conf/bblayers.conf
+          git clone -b kirkstone https://github.com/yoctoproject/poky.git
+          git clone -b kirkstone https://github.com/agherzan/meta-raspberrypi.git
+          cd poky
+          source ./oe-init-build-env 
+          bitbake core-image-minimal
 
     - name: Build image
       run: |
