@@ -19,9 +19,6 @@ jobs:
       run: |
           git clone -b kirkstone https://github.com/yoctoproject/poky.git
           git clone -b kirkstone https://github.com/agherzan/meta-raspberrypi.git
-          cd poky
-          source ./oe-init-build-env 
-          bitbake core-image-minimal
 
     - name: Build image
       run: |
