@@ -1,11 +1,17 @@
-name: 'Testing'
+name: 'zephyr-ghcr'
 on:
-  push:
+  workflow_dispatch:
   
 jobs:
-  triage:
+  zephyr:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/siliconlabs-massmarket/zephyr-env:latest:latest
+      # If your repo is private, you may need credentials, see further below.
     steps:
-      - name: Test GH action
+      # The rest of your steps can assume the Zephyr environment is pre-installed
+      - name: Build something
         run: |
-          echo "Testing"
+          west --version
+          pwd
+          ls /opt
