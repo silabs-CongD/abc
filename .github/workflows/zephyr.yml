@@ -34,7 +34,10 @@ jobs:
             
             tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz > /dev/null 2>&1
             cd zephyr-sdk-0.17.4
-            ./setup.sh -h -c -t all
+            echo 000000000000000000000000000
+            cat setup.sh
+            echo 000000000000000000000000000
+            ./setup.sh -c -t arm-zephyr-eabi
 
 
 
