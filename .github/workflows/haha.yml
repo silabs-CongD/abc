@@ -6,12 +6,16 @@ jobs:
   zephyr:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/siliconlabs-massmarket/zephyr-env:latest:latest
+      image: ghcr.io/siliconlabs-massmarket/zephyr-env:latest
       # If your repo is private, you may need credentials, see further below.
     steps:
       # The rest of your steps can assume the Zephyr environment is pre-installed
       - name: Build something
         run: |
           west --version
+          echo 00000000000000000
           pwd
+          echo 00000000000000000
           ls /opt
+          echo 00000000000000000
+          ls /opt/zephyrproject
